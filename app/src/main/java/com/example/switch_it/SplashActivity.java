@@ -1,24 +1,37 @@
 package com.example.switch_it;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
+
+@SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_splash2);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        setContentView(R.layout.activity_splash);
+
+        // Initialize the Lottie animation view
+        LottieAnimationView animationView = findViewById(R.id.splashAnimation);
+        animationView.setAnimation("rocketman.json"); // Ensure this matches your Lottie animation file
+        animationView.setRepeatCount(LottieDrawable.INFINITE); // Loop the animation indefinitely
+        animationView.playAnimation();
+
+        // Duration for the splash screen
+        int splashDuration = 6000; // 3 seconds
+
+        // Using a Handler to delay the transition to MainActivity
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish(); // Close the SplashActivity
+        }, splashDuration);
     }
 }
