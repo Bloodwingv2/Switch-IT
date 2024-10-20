@@ -34,6 +34,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
+            // Apply smooth transition animation
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             finish(); // Close the SplashActivity
         }, splashDuration);
     }
