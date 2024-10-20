@@ -20,8 +20,9 @@ import com.airbnb.lottie.LottieDrawable;
 public class SplashActivity extends AppCompatActivity {
 
     private static final int SPLASH_DURATION = 3600; // Total duration of the splash screen in milliseconds
+
     private LottieAnimationView animationView;
-    private TextView appNameTextView;
+    private TextView appNameTextView, mottoTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +39,12 @@ public class SplashActivity extends AppCompatActivity {
         animationView.setSpeed(1); // Set the speed of the animation
         animationView.playAnimation();
 
-        // Initialize the TextView for the app name
+        // Initialize the TextView for the app name and motto
         appNameTextView = findViewById(R.id.appNameTextView);
+        mottoTextView = findViewById(R.id.mottoTextView);
+
         setColoredAppName(); // Set the colored app name
+        setMottoText();      // Set the motto text
 
         // Using a Handler to delay the transition to MainActivity
         new Handler().postDelayed(() -> {
@@ -54,17 +58,35 @@ public class SplashActivity extends AppCompatActivity {
         }, SPLASH_DURATION);
     }
 
+    // Function to set colored app name
     private void setColoredAppName() {
         String fullText = "Switch-IT";
         SpannableString spannableString = new SpannableString(fullText);
 
-        // Change color of "Sw"
-        int redColor = ContextCompat.getColor(this, R.color.red); // Use ContextCompat to get the color
-        int yellow = ContextCompat.getColor(this, R.color.yellow);
-        spannableString.setSpan(new ForegroundColorSpan(redColor), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // Setting color of specific text in splash screen
-        spannableString.setSpan(new ForegroundColorSpan(redColor), 8, 9, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(yellow), 1, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        // Set the spannable string to the TextView
+        // Change color of specific letters in "Switch-IT"
+        int redColor = ContextCompat.getColor(this, R.color.red);
+        int yellowColor = ContextCompat.getColor(this, R.color.yellow);
+        spannableString.setSpan(new ForegroundColorSpan(redColor), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // S
+        spannableString.setSpan(new ForegroundColorSpan(redColor), 8, 9, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // T
+        spannableString.setSpan(new ForegroundColorSpan(yellowColor), 1, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // w
+
         appNameTextView.setText(spannableString);
+    }
+
+    // Function to set colored motto text
+    private void setMottoText() {
+        String motto = "Simple But Useful";
+        SpannableString spannableMotto = new SpannableString(motto);
+
+        // Apply color for the entire motto
+        int redColor = ContextCompat.getColor(this, R.color.red);
+        int yellowColor = ContextCompat.getColor(this, R.color.yellow);
+        spannableMotto.setSpan(new ForegroundColorSpan(redColor), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // S
+        spannableMotto.setSpan(new ForegroundColorSpan(yellowColor), 1, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableMotto.setSpan(new ForegroundColorSpan(redColor), 7, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // S
+        spannableMotto.setSpan(new ForegroundColorSpan(yellowColor), 8, 9, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableMotto.setSpan(new ForegroundColorSpan(redColor), 11, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // S
+        spannableMotto.setSpan(new ForegroundColorSpan(yellowColor), 12, 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mottoTextView.setText(spannableMotto);
     }
 }
