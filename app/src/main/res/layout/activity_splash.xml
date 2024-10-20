@@ -13,6 +13,7 @@
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/backgroundopacity"
         android:scaleType="centerCrop"
         android:src="@drawable/blues2"
         android:alpha="0.6"
