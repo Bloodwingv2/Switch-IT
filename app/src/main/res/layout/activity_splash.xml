@@ -21,17 +21,20 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
         app:lottie_rawRes="@raw/rocketman" />
+
+    <!-- It took me 2 hours to figure out i was missing an @font in font family, freaking incredible-->
     <TextView
         android:id="@+id/appNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="220dp"
         android:text="@string/app_name"
-        android:textSize="25sp"
         android:textColor="@color/white"
+        android:textSize="28sp"
+        android:fontFamily="@font/connection"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="32dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
