@@ -8,6 +8,21 @@
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
 
+    <!-- Background Image with 30% opacity -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/backgroundopacity"
+        android:scaleType="centerCrop"
+        android:src="@drawable/blues2"
+        android:alpha="0.6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Lottie Animation View -->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/splashAnimation"
         android:layout_width="0dp"
@@ -22,7 +37,7 @@
         app:lottie_loop="false"
         app:lottie_rawRes="@raw/rocketman" />
 
-    <!-- It took me 2 hours to figure out i was missing an @font in font family, freaking incredible-->
+    <!-- App Name Text -->
     <TextView
         android:id="@+id/appNameTextView"
         android:layout_width="wrap_content"
@@ -35,6 +50,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
