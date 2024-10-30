@@ -1,25 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white"
+    android:gravity="center_horizontal">
 
-    <!-- ImageView for displaying the selected image -->
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/selected_image"
-        android:scaleType="centerCrop"
-        android:background="@android:color/darker_gray" />
-
-    <!-- Button for converting the image -->
-    <Button
-        android:id="@+id/buttonConvert"
+    <!-- Branding Text -->
+    <TextView
+        android:id="@+id/brandingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/convert_image_to_png" />
+        android:text="@string/switch_it"
+        android:textSize="24sp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/black"
+        android:layout_marginBottom="8dp" />
 
+    <TextView
+        android:id="@+id/taglineText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Simple_But_Useful"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/gray"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Image Preview Area -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/preview_background"
+        android:contentDescription="@string/selectedimage"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Convert Button -->
+    <Button
+        android:id="@+id/buttonConvert"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/convert_image"
+        android:backgroundTint="@color/accent"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="24dp" />
 </LinearLayout>
