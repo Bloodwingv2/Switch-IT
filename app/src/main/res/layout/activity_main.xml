@@ -1,50 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/white"
-    android:gravity="center_horizontal">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
 
     <!-- Branding Text -->
     <TextView
         android:id="@+id/brandingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/switch_it"
-        android:textSize="24sp"
-        android:fontFamily="sans-serif-medium"
+        android:text="Switch-IT"
+        android:textSize="40sp"
+        android:fontFamily="@font/connection"
         android:textColor="@color/black"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="34dp" />
 
+    <!-- Tagline Text -->
     <TextView
         android:id="@+id/taglineText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Simple_But_Useful"
-        android:textSize="16sp"
-        android:fontFamily="sans-serif"
+        android:text="Simple But Useful"
+        android:textSize="20sp"
+        android:fontFamily="@font/connection"
         android:textColor="@color/gray"
-        android:layout_marginBottom="32dp" />
+        app:layout_constraintTop_toBottomOf="@id/brandingText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp" />
 
-    <!-- Image Preview Area -->
+    <!-- Enlarged Image Preview Area -->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="@drawable/preview_background"
-        android:contentDescription="@string/selectedimage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="Selected Image"
         android:scaleType="centerCrop"
-        android:layout_marginBottom="16dp" />
+        app:layout_constraintTop_toBottomOf="@id/taglineText"
+        app:layout_constraintBottom_toTopOf="@id/buttonConvert"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@android:color/darker_gray" />
 
-    <!-- Convert Button -->
+    <!-- Enlarged Convert Button -->
     <Button
         android:id="@+id/buttonConvert"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/convert_image"
+        android:text="Switch to PNG"
         android:backgroundTint="@color/accent"
         android:textColor="@android:color/white"
-        android:layout_marginTop="24dp" />
-</LinearLayout>
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="32dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
