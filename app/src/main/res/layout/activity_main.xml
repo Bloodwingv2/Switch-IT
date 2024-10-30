@@ -1,72 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white">
+    android:background="@drawable/gradient_background"
+    android:padding="16dp">
 
-    <!-- Branding Text -->
-    <TextView
-        android:id="@+id/brandingText"
+    <!-- App Name with Icon -->
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Switch-IT"
-        android:textSize="40sp"
-        android:fontFamily="@font/connection"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="34dp"
-        tools:ignore="HardcodedText" />
+        android:gravity="center_horizontal"
+        tools:ignore="UseCompoundDrawables">
 
-    <!-- Tagline Text -->
+        <!-- Icon for app name-->
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/rocketman2"
+            tools:ignore="ContentDescription,ExtraText" />
+
+        <!-- App Name Text -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Switch-IT"
+            android:textSize="30sp"
+            android:textColor="#333"
+            android:fontFamily="@font/connection"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <!-- Divider line under the title -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Tagline for the app -->
     <TextView
-        android:id="@+id/taglineText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Simple But Useful"
-        android:textSize="20sp"
+        android:textSize="23sp"
+        android:textColor="#666"
         android:fontFamily="@font/connection"
-        android:textColor="@color/gray"
-        app:layout_constraintTop_toBottomOf="@id/brandingText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
         tools:ignore="HardcodedText" />
 
-    <!-- Enlarged Image Preview Area -->
+    <!-- ImageView with rounded corners and shadow -->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="400dp"
-        android:layout_height="535dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp"
         android:contentDescription="Selected Image"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@id/taglineText"
-        app:layout_constraintBottom_toTopOf="@id/buttonConvert"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="22dp"
         android:background="@android:color/darker_gray"
-        tools:ignore="HardcodedText" />
+        android:scaleType="centerCrop"
+        android:layout_margin="8dp"
+        android:elevation="8dp"
+        android:clipToOutline="true"
+        android:outlineProvider="background"
+        tools:ignore="HardcodedText,UnusedAttribute" />
 
-    <!-- Enlarged Convert Button -->
+    <!-- Button for converting the image -->
     <Button
         android:id="@+id/buttonConvert"
-        android:layout_width="0dp"
-        android:layout_height="75sp"
-        android:text="Switch to PNG"
-        android:backgroundTint="@color/accent"
-        android:textColor="@android:color/white"
-        android:textSize="23sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/switch_to_png"
+        android:backgroundTint="#DE0606"
+        android:textColor="#FFFFFF"
         android:fontFamily="@font/connection"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom="50dp"
-        tools:ignore="HardcodedText" />
+        android:textAllCaps="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        android:elevation="4dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

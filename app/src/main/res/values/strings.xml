@@ -8,4 +8,5 @@
     <string name="switch_it">Switch-IT</string>
     <string name="convert_image">Convert Image</string>
     <string name="selectedimage">SelectedImage</string>
+    <string name="switch_to_png">SWITCH TO PNG</string>
 </resources>
