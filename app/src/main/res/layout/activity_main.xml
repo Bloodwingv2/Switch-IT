@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,7 +18,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="34dp" />
+        android:layout_marginTop="34dp"
+        tools:ignore="HardcodedText" />
 
     <!-- Tagline Text -->
     <TextView
@@ -31,36 +33,40 @@
         app:layout_constraintTop_toBottomOf="@id/brandingText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        tools:ignore="HardcodedText" />
 
     <!-- Enlarged Image Preview Area -->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="400dp"
+        android:layout_height="535dp"
         android:contentDescription="Selected Image"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toBottomOf="@id/taglineText"
         app:layout_constraintBottom_toTopOf="@id/buttonConvert"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:background="@android:color/darker_gray" />
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="22dp"
+        android:background="@android:color/darker_gray"
+        tools:ignore="HardcodedText" />
 
     <!-- Enlarged Convert Button -->
     <Button
         android:id="@+id/buttonConvert"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="75sp"
         android:text="Switch to PNG"
         android:backgroundTint="@color/accent"
         android:textColor="@android:color/white"
-        android:textSize="16sp"
+        android:textSize="23sp"
+        android:fontFamily="@font/connection"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginBottom="50dp"
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
