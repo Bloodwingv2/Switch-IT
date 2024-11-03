@@ -1,87 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
-    android:padding="16dp">
+    android:background="#333333">
 
-    <!-- App Name with Icon -->
+    <!-- Toolbar -->
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        tools:ignore="UseCompoundDrawables">
+        android:background="#4CAF50"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-        <!-- Icon for app name-->
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/rocketman2"
-            tools:ignore="ContentDescription,ExtraText" />
-
-        <!-- App Name Text -->
         <TextView
+            android:id="@+id/app_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Switch-IT"
-            android:textSize="30sp"
-            android:textColor="#333"
-            android:fontFamily="@font/connection"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="4dp"
-            tools:ignore="HardcodedText" />
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium" />
     </LinearLayout>
 
-    <!-- Divider line under the title -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000000"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Tagline for the app -->
-    <TextView
+    <!-- Add Image Button -->
+    <Button
+        android:id="@+id/btn_add_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Simple But Useful"
-        android:textSize="23sp"
-        android:textColor="#666"
-        android:fontFamily="@font/connection"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        tools:ignore="HardcodedText" />
-
-    <!-- ImageView with rounded corners and shadow -->
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="Selected Image"
-        android:background="@android:color/darker_gray"
-        android:scaleType="centerCrop"
-        android:layout_margin="8dp"
-        android:elevation="8dp"
-        android:clipToOutline="true"
-        android:outlineProvider="background"
-        tools:ignore="HardcodedText,UnusedAttribute" />
-
-    <!-- Button for converting the image -->
-    <Button
-        android:id="@+id/buttonConvert"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/switch_to_png"
-        android:backgroundTint="#DE0606"
+        android:layout_centerInParent="true"
+        android:backgroundTint="#4CAF50"
+        android:text="ADD IMAGE"
         android:textColor="#FFFFFF"
-        android:fontFamily="@font/connection"
-        android:textAllCaps="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp"
-        android:elevation="4dp" />
+        android:textAllCaps="true" />
 
-</LinearLayout>
+    <!-- History Text -->
+    <TextView
+        android:id="@+id/tv_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_add_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="HISTORY (1)"
+        android:textColor="#4CAF50"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif" />
+
+</RelativeLayout>
