@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#4CAF50"
+        android:background="#0D0000"
         android:orientation="horizontal"
         android:padding="16dp">
 
@@ -20,19 +20,20 @@
             android:text="Switch-IT"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:fontFamily="sans-serif-medium" />
+            android:fontFamily="@font/connection" />
     </LinearLayout>
 
     <!-- Add Image Button -->
     <Button
         android:id="@+id/btn_add_image"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:backgroundTint="#4CAF50"
+        android:background="@drawable/rounded_button"
         android:text="ADD IMAGE"
         android:textColor="#FFFFFF"
         android:textAllCaps="true" />
+
 
     <!-- History Text -->
     <TextView
@@ -45,6 +46,6 @@
         android:text="HISTORY (1)"
         android:textColor="#4CAF50"
         android:textSize="16sp"
-        android:fontFamily="sans-serif" />
+        android:fontFamily="@font/connection" />
 
 </RelativeLayout>

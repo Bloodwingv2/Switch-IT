@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#191970" /> <!-- Background color (e.g., Midnight Blue) -->
+    <corners android:radius="16dp" /> <!-- Adjust the radius for rounding -->
+</shape>

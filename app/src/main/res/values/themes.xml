@@ -2,9 +2,9 @@
 <resources>
     <style name="Theme.SwitchIT" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">#001F3F</item> <!-- Deep Navy for Toolbar -->
+        <item name="colorPrimaryDark">#000000</item> <!-- Black for status bar -->
+        <item name="colorAccent">#A020F0</item> <!-- Neon Purple for accents -->
     </style>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@null</item>
