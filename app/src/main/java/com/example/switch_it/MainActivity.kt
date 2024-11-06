@@ -1,6 +1,5 @@
 package com.example.switch_it
 
-import ConversionActivity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,6 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.switch_it.ui.theme.ConversionActivity
 
 class MainActivity : AppCompatActivity() {
     private var tvHistory: TextView? = null
