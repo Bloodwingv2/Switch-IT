@@ -46,20 +46,9 @@ class MainActivity : AppCompatActivity() {
         btnAddImage.setOnClickListener {
             // Open file manager to select images
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true) // Allows multiple image selection
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false) // Allows multiple image selection
             startActivityForResult(intent, PICK_IMAGES_REQUEST)
         }
-        // Assuming you have the selected image name (e.g., selectedImageName)
-        val selectedImageName = "example_image.png" // Replace with actual image name or path
-
-        // Create an Intent to start ConversionActivity
-                val intent = Intent(this, ConversionActivity::class.java)
-
-        // Pass the image name as an extra
-                intent.putExtra("IMAGE_NAME", selectedImageName)
-
-        // Start ConversionActivity
-                startActivity(intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -67,27 +56,82 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == PICK_IMAGES_REQUEST && resultCode == RESULT_OK && data != null) {
             val imageUris = ArrayList<Uri>()
+            val imageNames = ArrayList<String>() // To store image names
+            val imagePaths = ArrayList<String>() // To store image paths
 
             if (data.clipData != null) { // Multiple images selected
                 val count = data.clipData!!.itemCount
                 for (i in 0 until count) {
                     val imageUri = data.clipData!!.getItemAt(i).uri
                     imageUris.add(imageUri)
+
+                    // Retrieve image name and path
+                    val imageName = getImageName(imageUri)
+                    imageNames.add(imageName)
+
+                    val imagePath = getImagePathFromUri(imageUri)
+                    imagePaths.add(imagePath)
                 }
             } else if (data.data != null) { // Single image selected
                 val imageUri = data.data!!
                 imageUris.add(imageUri)
+
+                // Retrieve image name and path
+                val imageName = getImageName(imageUri)
+                imageNames.add(imageName)
+
+                val imagePath = getImagePathFromUri(imageUri)
+                imagePaths.add(imagePath)
             }
 
             // Increment history count and update UI
             historyCount++
             updateHistoryCount()
 
-            // Pass the selected images to the ConversionActivity
+            // Pass both the image name and image path to ConversionActivity
             val intent = Intent(this, ConversionActivity::class.java)
-            intent.putParcelableArrayListExtra("imageUris", imageUris)
+            if (imageNames.isNotEmpty()) {
+                intent.putExtra("imageName", imageNames[0]) // Pass the first image name
+            } else {
+                intent.putExtra("imageName", "No Image Selected")
+            }
+            if (imagePaths.isNotEmpty()) {
+                intent.putExtra("imagePath", imagePaths[0]) // Pass the first image path
+            } else {
+                intent.putExtra("imagePath", "No Image Selected")
+            }
             startActivity(intent)
         }
+    }
+
+    // Method to retrieve image name from Uri
+    private fun getImageName(uri: Uri): String {
+        var imageName = "Unknown"
+        val cursor = contentResolver.query(uri, null, null, null, null)
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val nameIndex = it.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME)
+                if (nameIndex != -1) {
+                    imageName = it.getString(nameIndex)
+                }
+            }
+        }
+        return imageName
+    }
+
+    // Method to retrieve image path from Uri
+    private fun getImagePathFromUri(uri: Uri): String {
+        var imagePath = "Unknown"
+        val cursor = contentResolver.query(uri, null, null, null, null)
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val columnIndex = it.getColumnIndex(MediaStore.Images.Media.DATA)
+                if (columnIndex != -1) {
+                    imagePath = it.getString(columnIndex)
+                }
+            }
+        }
+        return imagePath
     }
 
     // Method to update the history text
