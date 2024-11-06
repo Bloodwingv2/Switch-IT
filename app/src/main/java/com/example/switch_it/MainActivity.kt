@@ -1,5 +1,6 @@
 package com.example.switch_it
 
+import ConversionActivity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,7 +12,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.switch_it.ui.theme.ConversionActivity
 
 class MainActivity : AppCompatActivity() {
     private var tvHistory: TextView? = null
@@ -49,6 +49,17 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true) // Allows multiple image selection
             startActivityForResult(intent, PICK_IMAGES_REQUEST)
         }
+        // Assuming you have the selected image name (e.g., selectedImageName)
+        val selectedImageName = "example_image.png" // Replace with actual image name or path
+
+        // Create an Intent to start ConversionActivity
+                val intent = Intent(this, ConversionActivity::class.java)
+
+        // Pass the image name as an extra
+                intent.putExtra("IMAGE_NAME", selectedImageName)
+
+        // Start ConversionActivity
+                startActivity(intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

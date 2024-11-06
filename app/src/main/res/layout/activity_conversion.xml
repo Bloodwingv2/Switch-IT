@@ -54,6 +54,5 @@
                 android:padding="8dp"
                 android:layout_gravity="end"/>
         </LinearLayout>
-
     </LinearLayout>
 </RelativeLayout>
