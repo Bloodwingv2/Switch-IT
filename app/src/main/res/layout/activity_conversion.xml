@@ -21,57 +21,39 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:fontFamily="@font/connection" />
+        <LinearLayout
+            android:id="@+id/custom_button_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_button"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="20dp">
+
+            <!-- TextView to show the image name -->
+            <TextView
+                android:id="@+id/tv_image_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Selected Image"
+                android:textColor="#FFFFFF"
+                android:padding="8dp"
+                android:textSize="16sp"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <!-- Spinner to select conversion format -->
+            <Spinner
+                android:id="@+id/spinner_format"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/conversion_formats"
+                android:background="@drawable/spinner_background"
+                android:padding="8dp"
+                android:layout_gravity="end"/>
+        </LinearLayout>
+
     </LinearLayout>
-
-    <!-- Selected Images Preview (Example) -->
-    <TextView
-        android:id="@+id/selected_images_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:text="Selected Images"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:fontFamily="@font/connection" />
-
-    <!-- Conversion Options -->
-    <TextView
-        android:id="@+id/format_options_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/selected_images_label"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:text="Choose Format"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:fontFamily="@font/connection" />
-
-    <!-- Example Buttons for format options -->
-    <Button
-        android:id="@+id/btn_convert_to_png"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/format_options_label"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_button"
-        android:text="Convert to PNG"
-        android:textColor="#FFFFFF"
-        android:textAllCaps="true" />
-
-    <Button
-        android:id="@+id/btn_convert_to_pdf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_convert_to_png"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_button"
-        android:text="Convert to PDF"
-        android:textColor="#FFFFFF"
-        android:textAllCaps="true" />
-
 </RelativeLayout>

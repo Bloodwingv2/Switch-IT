@@ -9,4 +9,11 @@
     <string name="convert_image">Convert Image</string>
     <string name="selectedimage">SelectedImage</string>
     <string name="switch_to_png">SWITCH TO PNG</string>
+    <string-array name="conversion_formats">
+        <item>PNG</item>
+        <item>JPEG</item>
+        <item>PDF</item>
+        <!-- Add other formats as needed -->
+    </string-array>
+
 </resources>
