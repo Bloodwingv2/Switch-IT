@@ -7,9 +7,13 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.switch_it.R
 import java.io.File
 import java.io.FileOutputStream
@@ -26,6 +30,22 @@ class ConversionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_conversion)
+
+        // To Change Toolbar Text color
+        val appTitle: TextView = findViewById(R.id.app_title)
+
+        // Create a SpannableString with the text "Switch-IT"
+        val spannable = SpannableString("Switch-IT")
+        val redColor = ContextCompat.getColor(this, R.color.red)
+        val yellowColor = ContextCompat.getColor(this, R.color.yellow)
+
+        // Apply different colors to specific letters
+        spannable.setSpan(ForegroundColorSpan(redColor), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(ForegroundColorSpan(yellowColor), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(ForegroundColorSpan(redColor), 8, 9, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        // Set the SpannableString to the TextView
+        appTitle.text = spannable
 
         // Initialize views
         tvImageName = findViewById(R.id.tv_image_name)
