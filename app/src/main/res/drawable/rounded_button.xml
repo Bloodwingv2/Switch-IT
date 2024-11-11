@@ -1,0 +1,5 @@
+<!-- res/drawable/rounded_button.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#C62828" /> <!-- Button color -->
+    <corners android:radius="50dp" /> <!-- Adjust the radius to make it cylindrical -->
+</shape>

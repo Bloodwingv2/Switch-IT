@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#333333">
+
+    <!-- Toolbar -->
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0D0000"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/app_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Switch-IT"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:fontFamily="@font/connection" />
+    </LinearLayout>
+
+    <!-- Custom button layout below the toolbar and centered horizontally -->
+    <LinearLayout
+        android:id="@+id/custom_button_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_button"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/toolbar"
+        android:layout_centerHorizontal="true">
+
+        <!-- TextView to show the image name -->
+        <TextView
+            android:id="@+id/tv_image_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Selected Image"
+            android:textColor="#FFFFFF"
+            android:padding="8dp"
+            android:textSize="17sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/connection"/>
+
+        <!-- Spinner to select conversion format -->
+        <Spinner
+            android:id="@+id/spinner_format"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:entries="@array/conversion_formats"
+            android:background="@drawable/spinner_background"
+            android:padding="8dp"
+            android:layout_gravity="end"
+            android:fontFamily="@font/connection"/>
+    </LinearLayout>
+
+    <!-- Convert button aligned to the bottom -->
+    <Button
+        android:id="@+id/btn_convert"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:text="Switch-IT"
+        android:textSize="20sp"
+        android:background="@drawable/space"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/connection"/>
+</RelativeLayout>

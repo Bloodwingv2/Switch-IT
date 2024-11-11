@@ -3,4 +3,17 @@
     <string name="backgroundopacity">BackgroundOpacity</string>
     <string name="simple_but_useful">Simple But Useful</string>
     <string name="Simple_But_Useful" />
+    <string name="selected_image">Selected Image</string>
+    <string name="convert_image_to_png">Convert Image to PNG</string>
+    <string name="switch_it">Switch-IT</string>
+    <string name="convert_image">Convert Image</string>
+    <string name="selectedimage">SelectedImage</string>
+    <string name="switch_to_png">SWITCH TO PNG</string>
+    <string-array name="conversion_formats">
+        <item>PNG</item>
+        <item>JPEG</item>
+        <item>PDF</item>
+        <!-- Add other formats as needed -->
+    </string-array>
+
 </resources>
