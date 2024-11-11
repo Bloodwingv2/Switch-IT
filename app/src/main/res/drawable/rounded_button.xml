@@ -1,5 +1,5 @@
-<!-- res/drawable/rounded_button.xml -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#C62828" /> <!-- Button color -->
-    <corners android:radius="50dp" /> <!-- Adjust the radius to make it cylindrical -->
+    <solid android:color="#FF0000" /> <!-- Red color -->
+    <corners android:radius="12dp" /> <!-- Rounded corners -->
+    <stroke android:color="#B20000" android:width="2dp" /> <!-- Darker red border -->
 </shape>

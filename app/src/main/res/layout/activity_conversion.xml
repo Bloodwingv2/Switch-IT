@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/rounded_button"
+        android:background="@drawable/button_select"
         android:padding="8dp"
         android:gravity="center_vertical"
         android:layout_marginTop="20dp"
@@ -39,7 +39,7 @@
         <!-- TextView to show the image name -->
         <TextView
             android:id="@+id/tv_image_name"
-            android:layout_width="0dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Selected Image"
@@ -70,8 +70,8 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:text="Switch-IT"
+        android:background="@drawable/button_select"
         android:textSize="20sp"
-        android:background="@drawable/space"
         android:textColor="#FFFFFF"
         android:fontFamily="@font/connection"/>
 </RelativeLayout>
