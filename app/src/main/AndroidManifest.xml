@@ -29,6 +29,6 @@
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name="ConversionActivity"/>
+        <activity android:name=".ui.theme.ConversionActivity"/>
     </application>
 </manifest>

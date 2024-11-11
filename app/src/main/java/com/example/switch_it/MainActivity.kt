@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.switch_it.ui.theme.ConversionActivity
 
 class MainActivity : AppCompatActivity() {
     private var tvHistory: TextView? = null

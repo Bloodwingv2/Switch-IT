@@ -1,4 +1,4 @@
-package com.example.switch_it
+package com.example.switch_it.ui.theme
 
 import android.content.ContentValues
 import android.graphics.Bitmap
@@ -14,6 +14,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.switch_it.R
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
