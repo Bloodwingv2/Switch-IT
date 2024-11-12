@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.pdf.PdfDocument
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.text.Spannable
 import android.text.SpannableString
@@ -17,6 +18,8 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieDrawable
 import com.example.switch_it.R
 import java.io.File
 import java.io.FileInputStream
@@ -29,6 +32,7 @@ class ConversionActivity : AppCompatActivity() {
     private lateinit var tvSelectedFormat: TextView
     private lateinit var btnConvert: Button
     private lateinit var spinnerFormat: Spinner
+    private lateinit var animationView: LottieAnimationView  // Lottie Animation view
 
     private var imagePath: String? = null
     private var imageName: String? = null
@@ -43,7 +47,12 @@ class ConversionActivity : AppCompatActivity() {
         val redColor = ContextCompat.getColor(this, R.color.red)
         val yellowColor = ContextCompat.getColor(this, R.color.yellow)
         spannable.setSpan(ForegroundColorSpan(redColor), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannable.setSpan(ForegroundColorSpan(yellowColor), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(
+            ForegroundColorSpan(yellowColor),
+            1,
+            2,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         spannable.setSpan(ForegroundColorSpan(redColor), 8, 9, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         appTitle.text = spannable
 
@@ -52,6 +61,7 @@ class ConversionActivity : AppCompatActivity() {
         tvSelectedFormat = findViewById(R.id.tv_selected_format)
         btnConvert = findViewById(R.id.btn_convert)
         spinnerFormat = findViewById(R.id.spinner_format)
+        animationView = findViewById(R.id.splashAnimation) // Initialize Lottie animation view
 
         // Set up Spinner with a custom ArrayAdapter using spinner_item layout
         val adapter = ArrayAdapter.createFromResource(
@@ -69,7 +79,12 @@ class ConversionActivity : AppCompatActivity() {
 
         // Update selected format display when a new item is chosen in the Spinner
         spinnerFormat.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 updateSelectedFormatDisplay()
             }
 
@@ -88,7 +103,12 @@ class ConversionActivity : AppCompatActivity() {
         // Handle conversion action
         btnConvert.setOnClickListener {
             val selectedFormat = spinnerFormat.selectedItem.toString()
+
             if (!imagePath.isNullOrEmpty()) {
+                // Start the Lottie animation when conversion starts
+                startConversionAnimation()
+
+                // Proceed with the image conversion
                 convertImageToSelectedFormat(imagePath!!, selectedFormat)
             } else {
                 tvImageName.text = getString(R.string.error_no_image)
@@ -124,15 +144,25 @@ class ConversionActivity : AppCompatActivity() {
         } else {
             tvImageName.text = getString(R.string.error_conversion_failed)
         }
+
+        // Stop the animation after conversion (success or failure)
+        stopConversionAnimation()
     }
 
-    private fun convertImageToPNG(path: String): File? = convertImage(path, Bitmap.CompressFormat.PNG, "png")
-    private fun convertImageToJPEG(path: String): File? = convertImage(path, Bitmap.CompressFormat.JPEG, "jpg")
+    private fun convertImageToPNG(path: String): File? =
+        convertImage(path, Bitmap.CompressFormat.PNG, "png")
+
+    private fun convertImageToJPEG(path: String): File? =
+        convertImage(path, Bitmap.CompressFormat.JPEG, "jpg")
 
     /**
      * Generalized image conversion method
      */
-    private fun convertImage(path: String, format: Bitmap.CompressFormat, extension: String): File? {
+    private fun convertImage(
+        path: String,
+        format: Bitmap.CompressFormat,
+        extension: String
+    ): File? {
         val file = File(path)
         if (!file.exists()) return null
 
@@ -185,7 +215,10 @@ class ConversionActivity : AppCompatActivity() {
         val contentResolver = contentResolver
         val values = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, convertedFile.name)
-            put(MediaStore.MediaColumns.MIME_TYPE, if (convertedFile.extension == "pdf") "application/pdf" else "image/*")
+            put(
+                MediaStore.MediaColumns.MIME_TYPE,
+                if (convertedFile.extension == "pdf") "application/pdf" else "image/*"
+            )
             put(
                 MediaStore.MediaColumns.RELATIVE_PATH,
                 if (convertedFile.extension == "pdf") "Documents/SwitchIT" else "Pictures/SwitchIT"
@@ -208,5 +241,25 @@ class ConversionActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+    }
+
+    /**
+     * Starts the Lottie animation when conversion begins.
+     */
+    private fun startConversionAnimation() {
+        animationView.setAnimation("rocketman.json") // Set your Lottie file here
+        animationView.repeatCount = LottieDrawable.INFINITE // Set repeat count to infinite
+        animationView.setSpeed(1f) // Normal speed
+        animationView.visibility = View.VISIBLE
+        animationView.playAnimation()
+    }
+
+    /**
+     * Stops the Lottie animation after a fixed duration (4 seconds).
+     */
+    private fun stopConversionAnimation() {
+        Handler().postDelayed({
+            animationView.cancelAnimation() // Stop the animation
+        }, 3000) // Stop after 4 seconds
     }
 }
