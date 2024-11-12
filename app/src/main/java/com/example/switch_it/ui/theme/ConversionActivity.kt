@@ -1,6 +1,7 @@
 package com.example.switch_it.ui.theme
 
 import android.content.ContentValues
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.pdf.PdfDocument
@@ -18,6 +19,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.example.switch_it.R
@@ -36,6 +38,8 @@ class ConversionActivity : AppCompatActivity() {
 
     private var imagePath: String? = null
     private var imageName: String? = null
+    private var isConversionComplete = false
+    private var convertedFile: File? = null  // Track the converted file
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,12 +51,7 @@ class ConversionActivity : AppCompatActivity() {
         val redColor = ContextCompat.getColor(this, R.color.red)
         val yellowColor = ContextCompat.getColor(this, R.color.yellow)
         spannable.setSpan(ForegroundColorSpan(redColor), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannable.setSpan(
-            ForegroundColorSpan(yellowColor),
-            1,
-            2,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        spannable.setSpan(ForegroundColorSpan(yellowColor), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannable.setSpan(ForegroundColorSpan(redColor), 8, 9, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         appTitle.text = spannable
 
@@ -102,36 +101,38 @@ class ConversionActivity : AppCompatActivity() {
 
         // Handle conversion action
         btnConvert.setOnClickListener {
-            val selectedFormat = spinnerFormat.selectedItem.toString()
-
-            if (!imagePath.isNullOrEmpty()) {
-                // Start the Lottie animation when conversion starts
-                startConversionAnimation()
-
-                // Proceed with the image conversion with a delay for animation
-                Handler().postDelayed({
-                    convertImageToSelectedFormat(imagePath!!, selectedFormat)
-                }, 2200)  // Delay for 2 seconds
+            if (isConversionComplete) {
+                // Open the converted file once the conversion is complete
+                convertedFile?.let {
+                    openConvertedFile(it)
+                }
             } else {
-                tvImageName.text = getString(R.string.error_no_image)
+                val selectedFormat = spinnerFormat.selectedItem.toString()
+                if (!imagePath.isNullOrEmpty()) {
+                    // Start the Lottie animation when conversion starts
+                    startConversionAnimation()
+                    // Proceed with the image conversion with a delay for animation
+                    Handler().postDelayed({
+                        val file = convertImageToSelectedFormat(imagePath!!, selectedFormat)
+                        if (file != null) {
+                            convertedFile = file  // Store the converted file
+                            isConversionComplete = true
+                            btnConvert.text = "Open File" // Change button text after conversion
+                        }
+                    }, 2200)  // Delay for 2 seconds
+                } else {
+                    tvImageName.text = getString(R.string.error_no_image)
+                }
             }
         }
     }
 
-    /**
-     * Updates the TextView to display the currently selected format.
-     */
     private fun updateSelectedFormatDisplay() {
         val selectedFormat = spinnerFormat.selectedItem.toString()
         tvSelectedFormat.text = getString(R.string.spinner_format, selectedFormat)
     }
 
-    /**
-     * Converts the image to the selected format and saves it.
-     * @param path The path to the image
-     * @param format The format to convert the image to
-     */
-    private fun convertImageToSelectedFormat(path: String, format: String) {
+    private fun convertImageToSelectedFormat(path: String, format: String): File? {
         val convertedFile = when (format) {
             "PNG" -> convertImageToPNG(path)
             "JPEG" -> convertImageToJPEG(path)
@@ -147,8 +148,9 @@ class ConversionActivity : AppCompatActivity() {
             tvImageName.text = getString(R.string.error_conversion_failed)
         }
 
-        // Stop the animation after conversion (success or failure)
+        // Stop the animation after conversion
         stopConversionAnimation()
+        return convertedFile
     }
 
     private fun convertImageToPNG(path: String): File? =
@@ -165,7 +167,6 @@ class ConversionActivity : AppCompatActivity() {
         val pdfDocument = PdfDocument()
         val pageInfo = PdfDocument.PageInfo.Builder(bitmap.width, bitmap.height, 1).create()
         val page = pdfDocument.startPage(pageInfo)
-
         page.canvas.drawBitmap(bitmap, 0f, 0f, null)
         pdfDocument.finishPage(page)
 
@@ -184,14 +185,7 @@ class ConversionActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Generalized image conversion method
-     */
-    private fun convertImage(
-        path: String,
-        format: Bitmap.CompressFormat,
-        extension: String
-    ): File? {
+    private fun convertImage(path: String, format: Bitmap.CompressFormat, extension: String): File? {
         val file = File(path)
         if (!file.exists()) return null
 
@@ -209,22 +203,12 @@ class ConversionActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Saves the converted file to the appropriate directory using MediaStore.
-     * @param convertedFile The converted file (image or PDF)
-     */
     private fun saveFileToGallery(convertedFile: File) {
         val contentResolver = contentResolver
         val values = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, convertedFile.name)
-            put(
-                MediaStore.MediaColumns.MIME_TYPE,
-                if (convertedFile.extension == "pdf") "application/pdf" else "image/*"
-            )
-            put(
-                MediaStore.MediaColumns.RELATIVE_PATH,
-                if (convertedFile.extension == "pdf") "Documents/SwitchIT" else "Pictures/SwitchIT"
-            )
+            put(MediaStore.MediaColumns.MIME_TYPE, if (convertedFile.extension == "pdf") "application/pdf" else "image/*")
+            put(MediaStore.MediaColumns.RELATIVE_PATH, if (convertedFile.extension == "pdf") "Documents/SwitchIT" else "Pictures/SwitchIT")
         }
 
         val collectionUri = if (convertedFile.extension == "pdf") {
@@ -245,9 +229,6 @@ class ConversionActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Starts the Lottie animation when conversion begins.
-     */
     private fun startConversionAnimation() {
         animationView.setAnimation("rocketman.json") // Set your Lottie file here
         animationView.repeatCount = LottieDrawable.INFINITE // Set repeat count to infinite
@@ -255,10 +236,20 @@ class ConversionActivity : AppCompatActivity() {
         animationView.playAnimation()
     }
 
-    /**
-     * Stops the Lottie animation after conversion completes.
-     */
     private fun stopConversionAnimation() {
         animationView.cancelAnimation() // Stop the animation
+    }
+
+    private fun openConvertedFile(convertedFile: File) {
+        val uri = FileProvider.getUriForFile(
+            this,
+            "$packageName.fileprovider",
+            convertedFile
+        )
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = uri
+            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+        }
+        startActivity(intent)
     }
 }
