@@ -9,4 +9,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@null</item>
     </style>
+    <style name="CustomSpinnerStyle">
+        <item name="android:popupBackground">@drawable/spinner_dropdown_background</item>
+    </style>
 </resources>

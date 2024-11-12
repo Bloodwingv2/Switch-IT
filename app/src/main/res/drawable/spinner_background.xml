@@ -1,5 +1,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#FFFFFF" /> <!-- White background for the spinner -->
-    <corners android:radius="8dp" /> <!-- Rounded corners with 8dp radius -->
-    <stroke android:color="#6200EE" android:width="2dp" /> <!-- Border color and width -->
+    <solid android:color="#B0B0B0" /> <!-- Chrome-like light silver -->
+    <corners android:radius="15dp" /> <!-- Rounded corners -->
+    <stroke android:color="#8A8A8A" android:width="4dp" /> <!-- Subtle darker border -->
 </shape>

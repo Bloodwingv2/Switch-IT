@@ -1,0 +1,24 @@
+<!-- res/drawable/button_with_vertical_divider.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Button background -->
+    <item
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp"
+        android:bottom="0dp">
+        <shape>
+            <solid android:color="#FF6200EE" />
+        </shape>
+    </item>
+
+    <!-- Vertical Divider -->
+    <item
+        android:left="300dp"
+        android:right="0dp">
+    <shape>
+        <size
+            android:width="8dp" /> <!-- Divider width -->
+        <solid android:color="#FFFFFF" /> <!-- Divider color -->
+    </shape>
+</item>
+    </layer-list>

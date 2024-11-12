@@ -9,6 +9,9 @@ import android.provider.MediaStore
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
@@ -23,6 +26,7 @@ import java.io.IOException
 class ConversionActivity : AppCompatActivity() {
 
     private lateinit var tvImageName: TextView
+    private lateinit var tvSelectedFormat: TextView
     private lateinit var btnConvert: Button
     private lateinit var spinnerFormat: Spinner
 
@@ -45,23 +49,59 @@ class ConversionActivity : AppCompatActivity() {
 
         // Initialize views
         tvImageName = findViewById(R.id.tv_image_name)
+        tvSelectedFormat = findViewById(R.id.tv_selected_format)
         btnConvert = findViewById(R.id.btn_convert)
         spinnerFormat = findViewById(R.id.spinner_format)
+
+        // Set up Spinner with a custom ArrayAdapter using spinner_item layout
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.conversion_formats,
+            R.layout.spinner_item // Custom layout for Spinner item
+        ).apply {
+            setDropDownViewResource(R.layout.spinner_item) // Custom layout for dropdown item
+        }
+        spinnerFormat.adapter = adapter
+
+        // Set default selection to PNG (index 0) and display it
+        spinnerFormat.setSelection(0)
+        updateSelectedFormatDisplay()
+
+        // Update selected format display when a new item is chosen in the Spinner
+        spinnerFormat.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                updateSelectedFormatDisplay()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing
+            }
+        }
 
         // Receive image name and path from MainActivity
         imageName = intent.getStringExtra("imageName")
         imagePath = intent.getStringExtra("imagePath")
 
-        // Display the image name
-        tvImageName.text = imageName ?: "No Image Selected"
+        // Display the image name or a fallback message
+        tvImageName.text = imageName ?: getString(R.string.no_image_selected)
 
         // Handle conversion action
         btnConvert.setOnClickListener {
             val selectedFormat = spinnerFormat.selectedItem.toString()
             if (!imagePath.isNullOrEmpty()) {
                 convertImageToSelectedFormat(imagePath!!, selectedFormat)
+            } else {
+                tvImageName.text = getString(R.string.error_no_image)
             }
         }
+    }
+
+    /**
+     * Updates the TextView to display the currently selected format.
+     */
+    private fun updateSelectedFormatDisplay() {
+        val selectedFormat = spinnerFormat.selectedItem.toString()
+        tvSelectedFormat.text = getString(R.string.spinner_format, selectedFormat)
     }
 
     /**
@@ -79,10 +119,10 @@ class ConversionActivity : AppCompatActivity() {
 
         // Notify user and save to gallery
         if (convertedFile != null) {
-            tvImageName.text = "Conversion successful: ${convertedFile.name}"
+            tvImageName.text = getString(R.string.conversion_successful, convertedFile.name)
             saveFileToGallery(convertedFile)
         } else {
-            tvImageName.text = "Error in conversion"
+            tvImageName.text = getString(R.string.error_conversion_failed)
         }
     }
 
