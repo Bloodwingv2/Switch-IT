@@ -111,7 +111,7 @@ class ConversionActivity : AppCompatActivity() {
                 // Proceed with the image conversion with a delay for animation
                 Handler().postDelayed({
                     convertImageToSelectedFormat(imagePath!!, selectedFormat)
-                }, 2000)  // Delay for 2 seconds
+                }, 2400)  // Delay for 2 seconds
             } else {
                 tvImageName.text = getString(R.string.error_no_image)
             }
