@@ -12,7 +12,7 @@
     <string name="spinner_content_description">Select format</string>
     <string name="error_conversion_failed">Error in conversion</string>
     <string name="error_no_image">No image selected for conversion</string>
-    <string name="conversion_successful">Conversion successful: %1$s</string>
+    <string name="conversion_successful">Conversion successful</string>
     <string name="no_image_selected">No Image Selected</string>
     <string name="spinner_format">%1$s</string>
     <string-array name="conversion_formats">

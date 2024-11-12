@@ -108,8 +108,10 @@ class ConversionActivity : AppCompatActivity() {
                 // Start the Lottie animation when conversion starts
                 startConversionAnimation()
 
-                // Proceed with the image conversion
-                convertImageToSelectedFormat(imagePath!!, selectedFormat)
+                // Proceed with the image conversion with a delay for animation
+                Handler().postDelayed({
+                    convertImageToSelectedFormat(imagePath!!, selectedFormat)
+                }, 2000)  // Delay for 2 seconds
             } else {
                 tvImageName.text = getString(R.string.error_no_image)
             }
@@ -155,31 +157,6 @@ class ConversionActivity : AppCompatActivity() {
     private fun convertImageToJPEG(path: String): File? =
         convertImage(path, Bitmap.CompressFormat.JPEG, "jpg")
 
-    /**
-     * Generalized image conversion method
-     */
-    private fun convertImage(
-        path: String,
-        format: Bitmap.CompressFormat,
-        extension: String
-    ): File? {
-        val file = File(path)
-        if (!file.exists()) return null
-
-        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-        val outputFile = File(filesDir, "${file.nameWithoutExtension}.$extension")
-
-        return try {
-            FileOutputStream(outputFile).use { outputStream ->
-                bitmap.compress(format, 100, outputStream)
-            }
-            outputFile
-        } catch (e: IOException) {
-            e.printStackTrace()
-            null
-        }
-    }
-
     private fun convertImageToPDF(path: String): File? {
         val file = File(path)
         if (!file.exists()) return null
@@ -203,6 +180,31 @@ class ConversionActivity : AppCompatActivity() {
         } catch (e: IOException) {
             e.printStackTrace()
             pdfDocument.close()
+            null
+        }
+    }
+
+    /**
+     * Generalized image conversion method
+     */
+    private fun convertImage(
+        path: String,
+        format: Bitmap.CompressFormat,
+        extension: String
+    ): File? {
+        val file = File(path)
+        if (!file.exists()) return null
+
+        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+        val outputFile = File(filesDir, "${file.nameWithoutExtension}.$extension")
+
+        return try {
+            FileOutputStream(outputFile).use { outputStream ->
+                bitmap.compress(format, 100, outputStream)
+            }
+            outputFile
+        } catch (e: IOException) {
+            e.printStackTrace()
             null
         }
     }
@@ -250,16 +252,13 @@ class ConversionActivity : AppCompatActivity() {
         animationView.setAnimation("rocketman.json") // Set your Lottie file here
         animationView.repeatCount = LottieDrawable.INFINITE // Set repeat count to infinite
         animationView.setSpeed(1f) // Normal speed
-        animationView.visibility = View.VISIBLE
         animationView.playAnimation()
     }
 
     /**
-     * Stops the Lottie animation after a fixed duration (4 seconds).
+     * Stops the Lottie animation after conversion completes.
      */
     private fun stopConversionAnimation() {
-        Handler().postDelayed({
-            animationView.cancelAnimation() // Stop the animation
-        }, 3000) // Stop after 4 seconds
+        animationView.cancelAnimation() // Stop the animation
     }
 }
