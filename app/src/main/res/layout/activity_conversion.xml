@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#333333">
+    android:background="#333333"
+    tools:context=".ui.theme.ConversionActivity">
 
     <!-- Toolbar -->
     <LinearLayout
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#0D0000"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:background="#0D0000"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:id="@+id/app_title"
@@ -23,25 +29,52 @@
             android:fontFamily="@font/connection" />
     </LinearLayout>
 
-    <!-- Custom button layout below the toolbar and centered horizontally -->
+    <!-- ProgressBar for loading -->
+    <ProgressBar
+        android:id="@+id/loadingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_centerInParent="true" />
+
+    <!-- Lottie Animation for Loading -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/splashAnimation"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:lottie_rawRes="@raw/rocketman"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="false"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/loadingBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Custom button layout below the Lottie animation and centered horizontally -->
     <LinearLayout
         android:id="@+id/custom_button_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:orientation="horizontal"
-        android:background="@drawable/rounded_button"
+        android:background="@drawable/button_select_2"
         android:padding="8dp"
         android:gravity="center_vertical"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/toolbar"
-        android:layout_centerHorizontal="true">
+        app:layout_constraintTop_toBottomOf="@id/splashAnimation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_margin="16dp">
 
         <!-- TextView to show the image name -->
         <TextView
             android:id="@+id/tv_image_name"
-            android:layout_width="0dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="Selected Image"
             android:textColor="#FFFFFF"
             android:padding="8dp"
@@ -53,25 +86,56 @@
         <!-- Spinner to select conversion format -->
         <Spinner
             android:id="@+id/spinner_format"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="48dp"
+            android:padding="16dp"
+            android:contentDescription="@string/spinner_content_description"
             android:entries="@array/conversion_formats"
-            android:background="@drawable/spinner_background"
-            android:padding="8dp"
-            android:layout_gravity="end"
-            android:fontFamily="@font/connection"/>
+            android:focusable="true"
+            android:clickable="true"
+            android:longClickable="false"/>
+
+        <!-- TextView to display the selected format beside the Spinner -->
+        <TextView
+            android:id="@+id/tv_selected_format"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="Selected Format"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/connection"
+            android:textStyle="bold"/>
     </LinearLayout>
 
     <!-- Convert button aligned to the bottom -->
     <Button
         android:id="@+id/btn_convert"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
         android:text="Switch-IT"
+        android:background="@drawable/button_select"
         android:textSize="20sp"
-        android:background="@drawable/space"
         android:textColor="#FFFFFF"
-        android:fontFamily="@font/connection"/>
-</RelativeLayout>
+        android:fontFamily="@font/connection"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- TextView for conversion history count (if needed, add below button) -->
+    <TextView
+        android:id="@+id/tv_history_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="History Count: 0"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_convert"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

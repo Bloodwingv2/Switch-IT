@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Existing chrome-like background -->
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="#B0B0B0"/> <!-- Chrome-like color -->
+            <corners android:radius="12dp"/> <!-- Rounded corners -->
+            <stroke android:color="#8A8A8A" android:width="2dp"/> <!-- Border for depth -->
+        </shape>
+    </item>
+
+    <!-- Red section for the right end -->
+    <item android:left="265dp"> <!-- Fixed left margin for the red section -->
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="#9C27B0 "/> <!-- charcoal color for right end -->
+            <corners android:radius="12dp"/> <!-- Rounded corners -->
+        </shape>
+    </item>
+</layer-list>

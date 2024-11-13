@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#B0B0B0" /> <!-- Light metallic silver -->
+    <corners android:radius="16dp" /> <!-- Rounded corners for the dropdown -->
+    <stroke android:color="#8A8A8A" android:width="2dp" /> <!-- Subtle darker border -->
+</shape>

@@ -14,6 +14,17 @@
         android:theme="@style/Theme.SwitchIT"
         tools:targetApi="31">
 
+        <!-- FileProvider Declaration -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.switch_it.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
@@ -29,6 +40,8 @@
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+
         <activity android:name=".ui.theme.ConversionActivity"/>
+
     </application>
 </manifest>
