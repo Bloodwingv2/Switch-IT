@@ -45,8 +45,8 @@
     <!-- Lottie Animation for Loading -->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/splashAnimation"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
         app:lottie_rawRes="@raw/rocketman"
         app:lottie_loop="true"
         app:lottie_autoPlay="false"
@@ -93,7 +93,8 @@
             android:entries="@array/conversion_formats"
             android:focusable="true"
             android:clickable="true"
-            android:longClickable="false"/>
+            android:longClickable="false"
+            android:popupBackground="@drawable/spinner_dropdown_background"/>
 
         <!-- TextView to display the selected format beside the Spinner -->
         <TextView
