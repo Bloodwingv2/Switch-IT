@@ -30,5 +30,5 @@ Switch-IT is my first venture into app development, created with a commitment to
 > **Note:** Elements are not optimized for landscape mode. Please avoid using the app in landscape orientation or on devices running Android version 13 and below.
 
 Switch-IT is deployed and available for testing on Appetize:  
-[**Test Switch-IT on Appetize.io**](https://appetize.io/app/b_ivozyi42hs2rf3ptpqr7orduoi?device=pixel7&osVersion=14.0)
+[**DEMO**](https://appetize.io/app/b_ivozyi42hs2rf3ptpqr7orduoi?device=pixel7&osVersion=14.0)
 
