@@ -24,3 +24,10 @@
 Switch-IT is my first venture into app development, created with a commitment to delivering secure, user-friendly tools that prioritize privacy and efficiency. This project aims to empower users to manage their files independently without compromising data security.
 
 ---  
+
+## Deployment
+
+Switch-IT is deployed and available for testing on Appetize:  
+[**Test Switch-IT on Appetize.io**](https://appetize.io/app/b_ivozyi42hs2rf3ptpqr7orduoi?device=pixel7&osVersion=14.0)
+
+---
